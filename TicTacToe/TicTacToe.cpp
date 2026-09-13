@@ -4,6 +4,16 @@
 #include <ctime>
 using namespace std;
 
+// Function Prototypes
+void playGame();
+void MainMenu();
+void UserManual();
+void PlayerWins();
+void CPUWins();
+void Tie();
+void EndChoice();
+// Function Prototypes End
+
 class gameboard
 {
 public:
@@ -83,13 +93,15 @@ void playGame()
         if (game.wincheck() == true)
         {
             gameover = true;
-            cout << "\nGame Over, Player Wins!";
+            PlayerWins();
+            EndChoice();
             break;
         }
         if (turns >= 9)
         {
             gameover = true;
-            cout << "\nGame Over, It's a Tie!";
+            Tie();
+            EndChoice();
             break;
         }
         game.cputurn();
@@ -98,7 +110,8 @@ void playGame()
         if (game.losecheck() == true)
         {
             gameover = true;
-            cout << "\nGame Over, CPU Wins!";
+            CPUWins();
+			EndChoice();
             break;
         }
 
@@ -142,6 +155,45 @@ cout << "-----------------------------------" << endl;
 
 }
 
+// temporary place holder for Game Results.
+void PlayerWins() {
+	cout << "\nPlayer Wins!" << endl;
+	cout << "press 1 to return to the main menu..." << endl;
+	cout << "press 2 to exit the game..." << endl;
+}
+void CPUWins() {
+	cout << "\nCPU Wins!" << endl;
+	cout << "press 1 to return to the main menu..." << endl;
+	cout << "press 2 to exit the game..." << endl;
+}
+void Tie() {
+	cout << "\nIt's a Tie!" << endl;
+	cout << "press 1 to return to the main menu..." << endl;
+	cout << "press 2 to exit the game..." << endl;
+}
+
+void EndChoice() {
+	int choice;
+	while (true) {
+		cout << "Enter your choice: ";
+		cin >> choice;
+		if (cin.fail()) {
+			cin.clear(); // clear the error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+			cout << "Invalid input. Please enter a number (1 or 2)." << endl;
+		}
+        else if (choice == 1) {
+            break;
+		}
+		else if (choice == 2) {
+			cout << "Exiting the game. Goodbye!" << endl;
+			exit(0);
+		}
+		else {
+			cout << "Invalid choice. Please select 1 or 2." << endl;
+		}
+	}
+}
 
 int main()
 {
@@ -151,6 +203,13 @@ int main()
         MainMenu();
 
 		cin >> choice;
+
+		if (cin.fail()) {
+			cin.clear(); // clear the error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+			cout << "Invalid input. Please enter a number (1, 2, or 3).\nPress any Enter to continue..." << endl;
+            cin.get();
+		}
 
         if (choice == 1)
         {
