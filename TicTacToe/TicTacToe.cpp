@@ -10,6 +10,7 @@ public:
     string cells[9] = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
     void display()
     {
+		system("cls");
         cout << " " << cells[0] << " | " << cells[1] << " | " << cells[2] << "\n-----------\n " << cells[3] << " | " << cells[4] << " | " << cells[5] << "\n-----------\n " << cells[6] << " | " << cells[7] << " | " << cells[8] << "\n";
     }
     void playerturn()
@@ -106,7 +107,6 @@ void playGame()
 
 void MainMenu() {
 
-    int choice;
 
     cout << "---------------------------" << endl;
     cout << "|  Welcome to Tic-Tac-Toe |" << endl;
@@ -117,17 +117,10 @@ void MainMenu() {
     cout << "|      2. User Manual     |" << endl;
     cout << "|         3. Exit         |" << endl;
     cout << "---------------------------" << endl;
-
-    cin >> choice;
-    if (choice == 1)
-    {
-        playGame();
-    }
-
+    
 }
 
-void UserManual()
-{
+void UserManual() {
 cout << "-----------------------------------" << endl;
 cout << "| 1: The game is played on a      |" << endl;
 cout << "|    3x3 grid.                    |" << endl;
@@ -146,10 +139,39 @@ cout << "| and neither player filled three |" << endl;
 cout << "| spaces in a row, then the game  |" << endl;
 cout << "| is a draw.                      |" << endl;
 cout << "-----------------------------------" << endl; 
+
 }
 
 
 int main()
 {
-    MainMenu();
+    int choice;
+    while (true){
+		system("cls");
+        MainMenu();
+
+		cin >> choice;
+
+        if (choice == 1)
+        {
+            playGame();
+        }
+        else if (choice == 2)
+        {
+			system("cls");
+            UserManual();
+			cout << "Press any Enter to return to the main menu..." << endl;
+			cin.get();
+			cin.ignore();
+        }
+        else if (choice == 3)
+        {
+            cout << "Exiting the game. Goodbye!" << endl;
+            return 0;
+        }
+        else
+        {
+            cout << "Invalid choice. Please select 1, 2, or 3." << endl;
+        }
+    }
 }
