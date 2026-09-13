@@ -126,6 +126,29 @@ void MainMenu() {
 
 }
 
+void UserManual()
+{
+cout << "-----------------------------------" << endl;
+cout << "| 1: The game is played on a      |" << endl;
+cout << "|    3x3 grid.                    |" << endl;
+cout << "|---------------------------------|" << endl; 
+cout << "| 2: Players take turns placing   |" << endl;
+cout << "| their mark (X or O) in an       |" << endl;
+cout << "| empty space.                    |" << endl;
+cout << "|---------------------------------|" << endl; 
+cout << "| 3: The first player to get 3    |" << endl;
+cout << "| of their marks in a row,        |" << endl;
+cout << "| either horizontally, vertically |" << endl;
+cout << "| or diagonally, wins the game.   |" << endl;
+cout << "|---------------------------------|" << endl;
+cout << "| if all the spaces are filled,   |" << endl;
+cout << "| and neither player filled three |" << endl;
+cout << "| spaces in a row, then the game  |" << endl;
+cout << "| is a draw.                      |" << endl;
+cout << "-----------------------------------" << endl; 
+}
+
+
 int main()
 {
     MainMenu();
