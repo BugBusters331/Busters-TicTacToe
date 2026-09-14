@@ -25,18 +25,29 @@ public:
     }
     void playerturn()
     {
-        int playerchoice;
+        int playerchoice = 0;
         cout << "choose a cell (1-9): ";
         cin >> playerchoice;
-        playerchoice--;
-        if (cells[playerchoice] != " ")
+
+        if (cin.fail()) {
+            cin.clear(); // clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+            cout << "Invalid input. Please enter a number (1-9).\n";
+            playerturn();
+        }
+        else if (playerchoice < 1 || playerchoice > 9)
+        {
+            cout << "Number must be between 1 and 9, try again.\n";
+            playerturn();
+        }
+        else if (cells[playerchoice -1] == "x" || cells[playerchoice -1] == "o")
         {
             cout << "cell is already taken, try again.\n";
             playerturn();
         }
         else
         {
-            cells[playerchoice] = "x";
+            cells[playerchoice -1] = "x";
         }
     }
     void cputurn()
@@ -142,12 +153,22 @@ cout << "| 2: Players take turns placing   |" << endl;
 cout << "| their mark (X or O) in an       |" << endl;
 cout << "| empty space.                    |" << endl;
 cout << "|---------------------------------|" << endl; 
-cout << "| 3: The first player to get 3    |" << endl;
+cout << "| 3: To choose a space, select a  |" << endl;
+cout << "| number from 1-9, with each      |" << endl;
+cout << "| number corresponding to the     |" << endl;
+cout << "| spaces as shown below:          |" << endl;
+cout << "|            1 | 2 | 3            |" << endl;
+cout << "|           -----------           |" << endl;
+cout << "|            4 | 5 | 6            |" << endl;
+cout << "|           -----------           |" << endl;
+cout << "|            7 | 8 | 9            |" << endl;
+cout << "|---------------------------------|" << endl;
+cout << "| 4: The first player to get 3    |" << endl;
 cout << "| of their marks in a row,        |" << endl;
 cout << "| either horizontally, vertically |" << endl;
 cout << "| or diagonally, wins the game.   |" << endl;
 cout << "|---------------------------------|" << endl;
-cout << "| if all the spaces are filled,   |" << endl;
+cout << "| 5. If all the spaces are filled,|" << endl;
 cout << "| and neither player filled three |" << endl;
 cout << "| spaces in a row, then the game  |" << endl;
 cout << "| is a draw.                      |" << endl;
@@ -207,7 +228,7 @@ int main()
 		if (cin.fail()) {
 			cin.clear(); // clear the error flag
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
-			cout << "Invalid input. Please enter a number (1, 2, or 3).\nPress any Enter to continue..." << endl;
+			cout << "Invalid input. Please enter a number (1, 2, or 3).\nPress Enter to continue..." << endl;
             cin.get();
 		}
 
@@ -219,7 +240,7 @@ int main()
         {
 			system("cls");
             UserManual();
-			cout << "Press any Enter to return to the main menu..." << endl;
+			cout << "Press Enter to return to the main menu..." << endl;
 			cin.get();
 			cin.ignore();
         }
