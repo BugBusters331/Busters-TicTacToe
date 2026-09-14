@@ -147,7 +147,8 @@ void MainMenu() {
 void UserManual() {
 cout << "-----------------------------------" << endl;
 cout << "| 1: The game is played on a      |" << endl;
-cout << "|    3x3 grid.                    |" << endl;
+cout << "|    3x3 grid. You will be playing|" << endl;
+cout << "|    as 'X' and the CPU as 'O'.   |" << endl;
 cout << "|---------------------------------|" << endl; 
 cout << "| 2: Players take turns placing   |" << endl;
 cout << "| their mark (X or O) in an       |" << endl;
@@ -180,17 +181,20 @@ cout << "-----------------------------------" << endl;
 void PlayerWins() {
 	cout << "\nPlayer Wins!" << endl;
 	cout << "press 1 to return to the main menu..." << endl;
-	cout << "press 2 to exit the game..." << endl;
+	cout << "press 2 to Play Again..." << endl;
+	cout << "press 3 to Exit..." << endl;
 }
 void CPUWins() {
 	cout << "\nCPU Wins!" << endl;
 	cout << "press 1 to return to the main menu..." << endl;
-	cout << "press 2 to exit the game..." << endl;
+	cout << "press 2 to Play Again..." << endl;
+	cout << "press 3 to Exit..." << endl;
 }
 void Tie() {
 	cout << "\nIt's a Tie!" << endl;
 	cout << "press 1 to return to the main menu..." << endl;
-	cout << "press 2 to exit the game..." << endl;
+	cout << "press 2 to Play Again..." << endl;
+	cout << "press 3 to Exit..." << endl;
 }
 
 void EndChoice() {
@@ -207,6 +211,9 @@ void EndChoice() {
             break;
 		}
 		else if (choice == 2) {
+            playGame();
+		}
+		else if (choice == 3) {
 			cout << "Exiting the game. Goodbye!" << endl;
 			exit(0);
 		}
@@ -222,12 +229,13 @@ int main()
     while (true){
 		system("cls");
         MainMenu();
+       
 
 		cin >> choice;
 
 		if (cin.fail()) {
-			cin.clear(); // clear the error flag
-			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard invalid input
+			cin.clear(); 
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Invalid input. Please enter a number (1, 2, or 3).\nPress Enter to continue..." << endl;
             cin.get();
 		}
@@ -242,7 +250,7 @@ int main()
             UserManual();
 			cout << "Press Enter to return to the main menu..." << endl;
 			cin.get();
-			cin.ignore();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         else if (choice == 3)
         {
